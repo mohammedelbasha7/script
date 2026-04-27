@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leroy Style | חנות אונליין לבית ולגן</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar__promo">משלוח חינם בקנייה מעל ₪299 | איסוף מהיר מהסניף</div>
+      <div class="topbar__main container">
+        <a class="logo" href="#">LEROY STYLE</a>
+        <form class="search" role="search">
+          <input type="search" placeholder="מה מחפשים היום?" />
+          <button type="submit">חיפוש</button>
+        </form>
+        <nav class="topbar__actions">
+          <button class="icon-btn">חשבון</button>
+          <button class="icon-btn">מועדפים</button>
+          <button class="icon-btn" id="cartToggle">עגלה <span id="cartCount">0</span></button>
+        </nav>
+      </div>
+      <nav class="categories container">
+        <a href="#">מטבח</a>
+        <a href="#">אמבטיה</a>
+        <a href="#">צבע וכלים</a>
+        <a href="#">תאורה</a>
+        <a href="#">ריהוט גן</a>
+        <a href="#">כלי עבודה</a>
+        <a href="#">דקורציה</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero container">
+        <div class="hero__content">
+          <h1>כל מה שהבית שלכם צריך במקום אחד</h1>
+          <p>
+            מאות מוצרים לעיצוב, שדרוג ושיפוץ הבית - כולל מבצעים יומיים ומוצרים בלעדיים לאונליין.
+          </p>
+          <button class="cta">לכל המבצעים</button>
+        </div>
+      </section>
+
+      <section class="features container">
+        <article>
+          <h3>החזרה עד 30 יום</h3>
+          <p>קנייה בראש שקט עם מדיניות החזרה פשוטה ונוחה.</p>
+        </article>
+        <article>
+          <h3>אספקה מהירה</h3>
+          <p>משלוחים מהיום למחר באזורי ביקוש נבחרים.</p>
+        </article>
+        <article>
+          <h3>שירות מומחים</h3>
+          <p>צוות מקצועי זמין להתייעצות לפני הקנייה.</p>
+        </article>
+      </section>
+
+      <section class="section container">
+        <div class="section__head">
+          <h2>קטגוריות מובילות</h2>
+        </div>
+        <div class="category-grid">
+          <a class="card" href="#"><span>פתרונות אחסון</span></a>
+          <a class="card" href="#"><span>כלי עבודה חשמליים</span></a>
+          <a class="card" href="#"><span>תאורת פנים</span></a>
+          <a class="card" href="#"><span>ריהוט למרפסת</span></a>
+        </div>
+      </section>
+
+      <section class="section container">
+        <div class="section__head">
+          <h2>המוצרים הכי נמכרים</h2>
+        </div>
+        <div class="products" id="products"></div>
+      </section>
+
+      <section class="newsletter container">
+        <h2>מצטרפים למועדון הלקוחות?</h2>
+        <p>נרשמים ומקבלים קופון הנחה של 10% לקנייה הראשונה.</p>
+        <form>
+          <input type="email" placeholder="your@email.com" />
+          <button type="submit">הרשמה</button>
+        </form>
+      </section>
+    </main>
+
+    <aside class="cart" id="cartDrawer" aria-hidden="true">
+      <header>
+        <h3>עגלה</h3>
+        <button id="cartClose">✕</button>
+      </header>
+      <ul id="cartItems"></ul>
+      <footer>
+        <p>סה"כ: ₪<span id="cartTotal">0</span></p>
+        <button class="checkout">לתשלום</button>
+      </footer>
+    </aside>
+
+    <script src="script.js"></script>
+  </body>
+</html>
