@@ -1,0 +1,15 @@
+{
+  "name": "leroy-style-store",
+  "version": "1.0.0",
+  "description": "RTL storefront with CardCom checkout bridge",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "qa": "node scripts/qa-check.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2"
+  }
+}
