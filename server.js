@@ -11,8 +11,57 @@ const CARDCOM_API = 'https://secure.cardcom.solutions/api/v11/LowProfile/Create'
 const CARDCOM_TERMINAL = process.env.CARDCOM_TERMINAL;
 const CARDCOM_USERNAME = process.env.CARDCOM_USERNAME;
 
+const products = [
+  { id: 1, name: 'סט כלי עבודה 39 חלקים', price: 189, category: 'כלי עבודה' },
+  { id: 2, name: 'כיסא גן אלומיניום', price: 249, category: 'ריהוט גן' },
+  { id: 3, name: 'מנורת תלייה מעוצבת', price: 139, category: 'תאורה' },
+  { id: 4, name: 'מדף קיר דקורטיבי', price: 99, category: 'דקורציה' }
+];
+
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
+
+app.get('/api/health', (_req, res) => {
+  res.json({ ok: true, service: 'storefront-backend' });
+});
+
+app.post('/api/search', (req, res) => {
+  const query = (req.body?.query || '').trim();
+  if (!query) {
+    return res.json({ query: '', items: products });
+  }
+
+  const q = query.toLowerCase();
+  const items = products.filter(
+    (item) => item.name.toLowerCase().includes(q) || item.category.toLowerCase().includes(q)
+  );
+
+  return res.json({ query, items });
+});
+
+app.post('/api/ui-action', (req, res) => {
+  const action = req.body?.action;
+  const messages = {
+    account: 'כניסה לחשבון תוגדר מול מערכת משתמשים.',
+    favorites: 'המועדפים נשמרו בצד השרת.',
+    promotions: 'מבצעי היום נטענו מהשרת בהצלחה.'
+  };
+
+  if (!messages[action]) {
+    return res.status(400).json({ error: 'Unknown UI action.' });
+  }
+
+  return res.json({ ok: true, action, message: messages[action] });
+});
+
+app.post('/api/newsletter/subscribe', (req, res) => {
+  const email = (req.body?.email || '').trim();
+  if (!email || !email.includes('@')) {
+    return res.status(400).json({ error: 'Invalid email.' });
+  }
+
+  return res.json({ ok: true, message: `הכתובת ${email} נרשמה בהצלחה.` });
+});
 
 app.post('/api/cardcom/lowprofile', async (req, res) => {
   if (!CARDCOM_TERMINAL || !CARDCOM_USERNAME) {

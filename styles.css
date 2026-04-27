@@ -296,3 +296,14 @@ body {
   opacity: 0.65;
   cursor: not-allowed;
 }
+
+.page-status {
+  min-height: 1.25rem;
+  margin: 0.3rem auto 0.8rem;
+  color: #0f766e;
+  font-size: 0.95rem;
+}
+
+.page-status.error {
+  color: #b91c1c;
+}

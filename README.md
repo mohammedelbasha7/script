@@ -19,9 +19,21 @@
    ```
 4. Open http://localhost:3000
 
-## CardCom flow
+## Backend-connected buttons
 
-- Frontend sends cart total to `POST /api/cardcom/lowprofile`.
-- Server calls CardCom `LowProfile/Create` API.
-- On success, frontend redirects customer to CardCom secure payment page.
-- CardCom returns customer to `payment-success.html` or `payment-failed.html`.
+The following UI actions are connected to backend APIs:
+- Search button -> `POST /api/search`
+- Account button -> `POST /api/ui-action` (`account`)
+- Favorites button -> `POST /api/ui-action` (`favorites`)
+- Promotions button -> `POST /api/ui-action` (`promotions`)
+- Newsletter subscribe button -> `POST /api/newsletter/subscribe`
+- Checkout button -> `POST /api/cardcom/lowprofile`
+
+## QA smoke check
+
+After the server is running:
+```bash
+npm run qa
+```
+
+This validates the search endpoint and all non-payment button APIs.

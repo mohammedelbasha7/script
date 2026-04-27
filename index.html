@@ -17,25 +17,26 @@
       <div class="topbar__promo">משלוח חינם בקנייה מעל ₪299 | איסוף מהיר מהסניף</div>
       <div class="topbar__main container">
         <a class="logo" href="#">LEROY STYLE</a>
-        <form class="search" role="search">
-          <input type="search" placeholder="מה מחפשים היום?" />
-          <button type="submit">חיפוש</button>
+        <form class="search" id="searchForm" role="search">
+          <input id="searchInput" type="search" placeholder="מה מחפשים היום?" />
+          <button type="submit" id="searchBtn">חיפוש</button>
         </form>
         <nav class="topbar__actions">
-          <button class="icon-btn">חשבון</button>
-          <button class="icon-btn">מועדפים</button>
+          <button class="icon-btn" data-action="account">חשבון</button>
+          <button class="icon-btn" data-action="favorites">מועדפים</button>
           <button class="icon-btn" id="cartToggle">עגלה <span id="cartCount">0</span></button>
         </nav>
       </div>
-      <nav class="categories container">
-        <a href="#">מטבח</a>
-        <a href="#">אמבטיה</a>
-        <a href="#">צבע וכלים</a>
-        <a href="#">תאורה</a>
-        <a href="#">ריהוט גן</a>
-        <a href="#">כלי עבודה</a>
-        <a href="#">דקורציה</a>
+      <nav class="categories container" id="topCategories">
+        <a href="#" data-category="מטבח">מטבח</a>
+        <a href="#" data-category="אמבטיה">אמבטיה</a>
+        <a href="#" data-category="צבע וכלים">צבע וכלים</a>
+        <a href="#" data-category="תאורה">תאורה</a>
+        <a href="#" data-category="ריהוט גן">ריהוט גן</a>
+        <a href="#" data-category="כלי עבודה">כלי עבודה</a>
+        <a href="#" data-category="דקורציה">דקורציה</a>
       </nav>
+      <p class="page-status container" id="pageStatus" aria-live="polite"></p>
     </header>
 
     <main>
@@ -45,7 +46,7 @@
           <p>
             מאות מוצרים לעיצוב, שדרוג ושיפוץ הבית - כולל מבצעים יומיים ומוצרים בלעדיים לאונליין.
           </p>
-          <button class="cta">לכל המבצעים</button>
+          <button class="cta" id="promoBtn" data-action="promotions">לכל המבצעים</button>
         </div>
       </section>
 
@@ -68,11 +69,11 @@
         <div class="section__head">
           <h2>קטגוריות מובילות</h2>
         </div>
-        <div class="category-grid">
-          <a class="card" href="#"><span>פתרונות אחסון</span></a>
-          <a class="card" href="#"><span>כלי עבודה חשמליים</span></a>
-          <a class="card" href="#"><span>תאורת פנים</span></a>
-          <a class="card" href="#"><span>ריהוט למרפסת</span></a>
+        <div class="category-grid" id="featuredCategories">
+          <a class="card" href="#" data-category="פתרונות אחסון"><span>פתרונות אחסון</span></a>
+          <a class="card" href="#" data-category="כלי עבודה חשמליים"><span>כלי עבודה חשמליים</span></a>
+          <a class="card" href="#" data-category="תאורת פנים"><span>תאורת פנים</span></a>
+          <a class="card" href="#" data-category="ריהוט למרפסת"><span>ריהוט למרפסת</span></a>
         </div>
       </section>
 
@@ -86,8 +87,8 @@
       <section class="newsletter container">
         <h2>מצטרפים למועדון הלקוחות?</h2>
         <p>נרשמים ומקבלים קופון הנחה של 10% לקנייה הראשונה.</p>
-        <form>
-          <input type="email" placeholder="your@email.com" />
+        <form id="newsletterForm">
+          <input id="newsletterEmail" type="email" placeholder="your@email.com" required />
           <button type="submit">הרשמה</button>
         </form>
       </section>
