@@ -285,3 +285,14 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+.checkout-status {
+  min-height: 1.25rem;
+  font-size: 0.9rem;
+  color: #334155;
+}
+
+.checkout:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}

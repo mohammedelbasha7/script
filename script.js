@@ -30,6 +30,8 @@ const cartItemsEl = document.getElementById('cartItems');
 const cartTotalEl = document.getElementById('cartTotal');
 const cartCountEl = document.getElementById('cartCount');
 const cartDrawer = document.getElementById('cartDrawer');
+const checkoutBtn = document.getElementById('checkoutBtn');
+const checkoutStatus = document.getElementById('checkoutStatus');
 const cart = [];
 
 function renderProducts() {
@@ -62,6 +64,44 @@ function renderCart() {
   const total = cart.reduce((sum, item) => sum + item.price, 0);
   cartTotalEl.textContent = total;
   cartCountEl.textContent = cart.length;
+  checkoutBtn.disabled = cart.length === 0;
+}
+
+async function beginCardcomCheckout() {
+  if (!cart.length) return;
+
+  checkoutBtn.disabled = true;
+  checkoutStatus.textContent = 'מכינים עמוד תשלום מאובטח...';
+
+  const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+  try {
+    const response = await fetch('/api/cardcom/lowprofile', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        amount: total,
+        orderId: `web-${Date.now()}`,
+        customerName: 'לקוח מהאתר'
+      })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error || 'שגיאה ביצירת תשלום');
+    }
+
+    const lowProfileCode = result?.LowProfileCode || result?.lowprofilecode;
+    if (!lowProfileCode) {
+      throw new Error('לא התקבל LowProfileCode מ-CardCom');
+    }
+
+    window.location.href = `https://secure.cardcom.solutions/Interface/LowProfile.aspx?LowProfileCode=${encodeURIComponent(lowProfileCode)}`;
+  } catch (error) {
+    checkoutBtn.disabled = false;
+    checkoutStatus.textContent = `שגיאה בחיבור ל-CardCom: ${error.message}`;
+  }
 }
 
 productsEl.addEventListener('click', (e) => {
@@ -69,6 +109,7 @@ productsEl.addEventListener('click', (e) => {
   if (!id) return;
   const product = productData.find((item) => item.id === id);
   cart.push(product);
+  checkoutStatus.textContent = '';
   renderCart();
 });
 
@@ -81,6 +122,8 @@ document.getElementById('cartClose').addEventListener('click', () => {
   cartDrawer.classList.remove('open');
   cartDrawer.setAttribute('aria-hidden', 'true');
 });
+
+checkoutBtn.addEventListener('click', beginCardcomCheckout);
 
 renderProducts();
 renderCart();
